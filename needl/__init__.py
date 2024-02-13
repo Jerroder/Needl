@@ -18,7 +18,7 @@ def init(_args):
     args = _args
 
     with open(args.datadir + '/settings.yaml', 'r') as f:
-        settings = yaml.load(f)
+        settings = yaml.safe_load(f)
 
     logging.basicConfig(stream=args.logfile,
                         level=logging.DEBUG if args.verbose else logging.INFO,
