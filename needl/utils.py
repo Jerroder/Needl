@@ -48,15 +48,16 @@ def url_is_absolute(link):
 
 
 def get_browser():
-    geckodriver = os.path.join(needl.args.datadir, 'geckodriver')
-    if not os.path.exists(geckodriver):
-        raise FileNotFoundError("Could not find chromedriver executable at %s. Download it for your platform at https://github.com/mozilla/geckodriver/releases", geckodriver)
+#    geckodriver = os.path.join(needl.args.datadir, 'geckodriver')
+#    if not os.path.exists(geckodriver):
+#        raise FileNotFoundError("Could not find chromedriver executable at %s. Download it for your platform at https://github.com/mozilla/geckodriver/releases", geckodriver)
 
     firefox_options = webdriver.FirefoxOptions()
     firefox_options.add_argument("--headless")
     firefox_options.add_argument("user-agent=" + get_line(os.path.join(needl.args.datadir, 'user-agents.txt')))
+#    firefox_options.binary_location = geckodriver
 
-    return webdriver.Firefox(executable_path=geckodriver, options=firefox_options)
+    return webdriver.Firefox(options=firefox_options)
 
 
 def process_click_depth(browser, click_depth=None):

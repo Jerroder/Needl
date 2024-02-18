@@ -6,7 +6,7 @@ alexa:
     update_interval: 3 # days
 
 google:
-    base_url: 'https://www.google.co.uk'
+    base_url: 'https://www.google.com'
     click_through: True # click a random search result
     click_depth: 1 # integer or random range
     search_interval: '2..4' # # minutes as integer or random range

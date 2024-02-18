@@ -1,4 +1,5 @@
 import needl, needl.schedule as schedule, needl.utils as utils
+from selenium.webdriver.common.by import By
 
 GOOGLE = needl.settings['google']['base_url']
 
@@ -16,15 +17,15 @@ def search():
 
     browser = utils.get_browser()
     browser.get(GOOGLE)
-    search_form = browser.find_element_by_id('tsf')
-    browser.find_elements_by_css_selector('input[name=q]')[0].send_keys(search_phrase)
+    search_form = browser.find_element(By.ID, 'APjFqb')
+    browser.find_element(By.CSS_SELECTOR, '[name="q"]').send_keys(search_phrase)
     search_form.submit()
 
-    results_count = browser.find_element_by_id('resultStats').text.rstrip()
-    needl.log.debug('%s for %s', results_count, search_phrase)
+    #results_count = browser.find_element(By.ID, 'result-stats').text.rstrip()
+    #needl.log.debug('%s for %s', results_count, search_phrase)
 
     if needl.settings['google']['click_through']:
-        links = [link for link in browser.find_elements_by_css_selector('h3.r > a') if utils.url_is_absolute(link.get_attribute('href'))]
+        links = [link for link in browser.find_elements(By.CSS_SELECTOR, 'h3.r > a') if utils.url_is_absolute(link.get_attribute('href'))]
 
         if len(links) > 0:
             link = needl.rand.choice(links).get_attribute('href')
